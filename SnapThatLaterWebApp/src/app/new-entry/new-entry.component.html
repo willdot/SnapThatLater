@@ -1,4 +1,6 @@
-<webcam></webcam>
-<div class="btn btn-warning" (click)='onFindMe()'>Find me</div>
-<div #gmap style="width:70%;height: 400px"></div>
-<button class='btn btn-success' (click)='onSaveClicked()'>Save</button>
+<div class="webcam">
+    <button class='btn btn-success' (click)='onSaveClicked()'>Save</button>
+    <webcam></webcam>
+    <div class="btn btn-warning" (click)='onFindMe()'>Find me</div>
+    <div #googlemap class="map"></div>
+</div>
