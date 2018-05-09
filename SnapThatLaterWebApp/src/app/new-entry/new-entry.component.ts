@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import {} from '@types/googlemaps';
 
 @Component({
   selector: 'app-new-entry',
