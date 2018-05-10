@@ -13,7 +13,7 @@ import { MapComponent } from './map/map.component';
 const appRoutes: Routes = [
   {path: '', component: MyListComponent},
   {path: 'my-list', component: MyListComponent},
-  {path: '**', redirectTo: ''}
+  {path: '**', redirectTo: 'my-list'}
 ];
 
 @NgModule({

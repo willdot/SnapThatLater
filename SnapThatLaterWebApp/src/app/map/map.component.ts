@@ -72,4 +72,10 @@ export class MapComponent implements OnInit {
     this.onLocationSaved.emit(result);
   }
 
+  onCancelClicked(): void {
+    let result : Array<number> = [0,0]
+
+    this.onLocationSaved.emit(result);
+  }
+
 }

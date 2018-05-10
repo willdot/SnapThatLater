@@ -1,14 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
+<div class='panel panel-primary panelStyle'>
+  <div class="background" style="text-align:center">
+    <h1>
+      Snap that later!
+    </h1>
 
-<div *ngIf='newEntry==false'>
-    <button class="btn btn-primary"(click)='onNewClicked()'>New Entry</button>
-</div>
 
-<div *ngIf='newEntry==true'>
-  <app-new-entry (onSaved)="onSavedEntryCompleted($event)"></app-new-entry>
+    <div *ngIf='newEntry==false'>
+      <button class="btn btn-primary newEntry" (click)='onNewClicked()'>New Entry</button>
+    </div>
+
+  </div>
+
+  <div *ngIf='newEntry==true' class="container newEntryContainer">
+    <app-new-entry (onSaved)="onSavedEntryCompleted($event)"></app-new-entry>
+  </div>
 </div>

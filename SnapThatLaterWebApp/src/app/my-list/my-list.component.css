@@ -1,0 +1,22 @@
+.newEntry {
+    margin: 15px;
+    display: block;
+}
+
+.background {
+    background-color: white;
+}
+
+.newEntryContainer {
+    
+    margin: 10px;
+    padding: 10px;
+    background-color: whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+
+.panelStyle {
+    background-color: white;
+}
