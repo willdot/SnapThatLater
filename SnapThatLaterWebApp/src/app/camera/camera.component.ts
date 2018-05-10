@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-camera',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CameraComponent implements OnInit {
 
+  @Output() onCameraSaved = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+
+  onSaveCameraClick() : void {
+    this.onCameraSaved.emit('saved');
+  }
+
+  onCancelCameraClick() : void {
+
+    this.onCameraSaved.emit('cancelled');
+  }
 }

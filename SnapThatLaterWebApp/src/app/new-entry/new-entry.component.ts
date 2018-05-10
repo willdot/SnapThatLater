@@ -37,5 +37,10 @@ export class NewEntryComponent implements OnInit {
     console.log(`Longitude: ${location[1]}`);
   }
 
+  onCameraSavedComplete(camera: string) {
+    console.log(camera);
+    this.showCamera = false;
+  }
+
 
 }
