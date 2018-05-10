@@ -1,6 +1,12 @@
 <div class="webcam">
     <button class='btn btn-success' (click)='onSaveClicked()'>Save</button>
-   <!-- <webcam></webcam>-->
-    <div class="btn btn-warning" (click)='onFindMe()'>Find me</div>
-    <div #googlemap class="map"></div>
+    <button class="btn btn-warning" (click)='onShowCameraClicked()'>Add photo</button>
+    <button class="btn btn-warning" (click)='onShowMapClicked()'>Find me</button>
+    <div *ngIf='showCamera==true'>
+        <app-camera></app-camera>
+    </div>
+
+    <div *ngIf='showMap==true'>
+        <app-map (onLocationSaved)="onLocationSavedCompleted($event)"></app-map>
+    </div>
 </div>

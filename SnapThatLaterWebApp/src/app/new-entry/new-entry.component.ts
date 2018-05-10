@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import {} from '@types/googlemaps';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-new-entry',
@@ -9,47 +9,33 @@ import {} from '@types/googlemaps';
 export class NewEntryComponent implements OnInit {
 
   @Output() onSaved = new EventEmitter<boolean>();
-  @ViewChild('googlemap') gmapElement: any;
   
-  map: google.maps.Map;
-  marker: google.maps.Marker;
+  showCamera: boolean = false;
+  showMap: boolean = false;
   
   constructor() { }
 
   ngOnInit() {
-    var mapOptions = {
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapOptions);
-  }
-
-  onFindMe() : void {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.showMe(position);
-      });
-    } else {
-      alert("Geolocation not available for this browser");
-    } 
-  }
-
-  showMe(position) : void {
     
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-   
-    this.map.setCenter(location);
+  }
 
-    this.marker = new google.maps.Marker({
-      position: location,
-      map: this.map,
-      title: 'This is your current location'
-    });
+  onShowCameraClicked() : void {
+    this.showCamera = !this.showCamera;
+  }
+
+  onShowMapClicked() : void {
+    this.showMap = !this.showMap;
   }
 
   onSaveClicked() : void {
     this.onSaved.emit(false);
   }
+
+  onLocationSavedCompleted(location: Array<number>) {
+    this.showMap = false;
+    console.log(`Latitude: ${location[0]}`);
+    console.log(`Longitude: ${location[1]}`);
+  }
+
 
 }
