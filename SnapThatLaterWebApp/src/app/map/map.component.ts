@@ -16,6 +16,8 @@ export class MapComponent implements OnInit {
 
   long: number;
   lat: number;
+  found: boolean;
+  errorMessage: string = '';
 
   constructor() { }
 
@@ -31,9 +33,9 @@ export class MapComponent implements OnInit {
     this.findMe();
   }
 
-  showMe(position) : void {
+  showMe(lat: number, long: number) : void {
     
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    let location = new google.maps.LatLng(lat, long);
    
     this.map.setCenter(location);
 
@@ -42,6 +44,8 @@ export class MapComponent implements OnInit {
       map: this.map,
       title: 'This is your current location'
     });
+
+    this.found = true;
   }
 
   findMe() : void {
@@ -50,10 +54,12 @@ export class MapComponent implements OnInit {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
         this.long = position.coords.longitude;
-        this.showMe(position);
+        this.showMe(position.coords.latitude, position.coords.longitude);
+        this.errorMessage = '';
       },
       error => {
-        console.log('nope');
+        console.log(`Not working: ${error}`);
+        this.errorMessage = 'Failed to locate. Please try again.'
       },
       {
         maximumAge:1000,
@@ -63,6 +69,19 @@ export class MapComponent implements OnInit {
     } else {
       alert("Geolocation not available for this browser");
     } 
+  }
+
+  onRelocateMeClicked() : void {
+    if (!this.lat || !this.long) {
+      this.findMe();
+    } else {
+      this.showMe(this.lat, this.long);
+    }
+  }
+
+  onRetryClicked() : void {
+    this.errorMessage = '';
+    this.findMe();
   }
 
   onSaveLocationClicked() : void {
