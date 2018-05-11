@@ -11,3 +11,13 @@
         <app-map (onLocationSaved)="onLocationSavedCompleted($event)"></app-map>
     </div>
 </div>
+
+<div>
+    {{image}}
+    {{location[0]}}
+    {{location[1]}}
+</div>
+
+<div *ngIf='googleResult!=null'>
+    {{googleResult['results'][0]['address_components'][1]['long_name']}}, {{googleResult['results'][0]['address_components'][2]['long_name']}}
+</div>

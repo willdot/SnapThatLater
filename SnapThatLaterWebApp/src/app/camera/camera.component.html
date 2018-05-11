@@ -1,5 +1,10 @@
 <div class="camera">
-  <button class="btn btn-success"(click)="onSaveCameraClick()">Save</button>
+  <button *ngIf='photoTaken==true' class="btn btn-success"(click)="onSaveCameraClick()">Save</button>
+  <button *ngIf='photoTaken==true' class="btn btn-warning"(click)="onRetakeClick()">Retake</button>
+  <button *ngIf='photoTaken==false' class="btn btn-success" (click)="takePhotoClick()">Take photo</button>
   <button class="btn btn-warning"(click)="onCancelCameraClick()">Cancel</button>
-  <webcam></webcam>
+  
+  <webcam *ngIf='photoTaken==false' [width]="maxCameraWidth" [height]="maxCameraHeight" (imageCapture)="handleImage($event)"
+  [trigger]="triggerObservable"></webcam>
+  <img *ngIf='photoTaken==true'  [src]="cameraImage.imageAsDataUrl"/>
 </div>
