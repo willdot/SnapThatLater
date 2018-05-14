@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 //import { loadavg } from 'os';
 import { GoogleLocationService } from '../services/google-location.service';
+import { SnapEntryInterface } from '../models/snap-entry-interface';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { GoogleLocationService } from '../services/google-location.service';
 })
 export class NewEntryComponent implements OnInit {
 
-  @Output() onSaved = new EventEmitter<boolean>();
+  @Output() onSaved = new EventEmitter<SnapEntryInterface>();
 
   showCamera: boolean = false;
   showMap: boolean = false;
@@ -34,7 +35,18 @@ export class NewEntryComponent implements OnInit {
   }
 
   onSaveClicked(): void {
-    this.onSaved.emit(false);
+
+    let outPut : SnapEntryInterface = {
+      description: 'Something',
+      location: this.location,
+      photo: this.image
+    }
+
+    this.onSaved.emit(outPut);
+  }
+
+  onCancelClicked() : void {
+    this.onSaved.emit(null);
   }
 
   onLocationSavedCompleted(location: Array<number>) {

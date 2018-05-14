@@ -1,5 +1,8 @@
 <button class='btn btn-success' (click)='onSaveClicked()'>
     Save</button>
+<button class="btn btn-danger" (click)='onCancelClicked()'>
+    Cancel
+</button>
 <button *ngIf='showCamera==false && showMap==false' class="btn btn-warning" (click)='onShowCameraClicked()'>Add photo</button>
 <button *ngIf='showMap==false && showCamera==false' class="btn btn-warning" (click)='onShowMapClicked()'>Find me</button>
 <div class="webcam">

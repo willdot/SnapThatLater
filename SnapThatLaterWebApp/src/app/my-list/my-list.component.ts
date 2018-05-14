@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnapEntryInterface } from '../models/snap-entry-interface';
 
 @Component({
   selector: 'app-my-list',
@@ -13,13 +14,16 @@ export class MyListComponent implements OnInit {
   }
 
   newEntry: boolean = false;
+  entries: SnapEntryInterface[] = [];
 
   onNewClicked(): void {
     this.newEntry = true;
   }
 
-  onSavedEntryCompleted(saved: boolean) {
-    this.newEntry = saved;
+  onSavedEntryCompleted(saved: SnapEntryInterface) {
+    this.newEntry = false;
+
+    this.entries.push(saved);
   }
 
 }
