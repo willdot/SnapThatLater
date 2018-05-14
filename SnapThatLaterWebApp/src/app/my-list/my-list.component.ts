@@ -22,8 +22,9 @@ export class MyListComponent implements OnInit {
 
   onSavedEntryCompleted(saved: SnapEntryInterface) {
     this.newEntry = false;
-
-    this.entries.push(saved);
+    if (saved != null) {
+      this.entries.push(saved);
+    }
   }
 
 }
