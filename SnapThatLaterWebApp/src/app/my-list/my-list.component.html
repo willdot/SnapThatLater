@@ -3,17 +3,6 @@
   <div class="background" style="text-align:center">
     <h1>
     </h1>
-    <div>
-      <ul>
-        <div *ngFor='let entry of entries'>
-          <div>Description: {{entry.description}}</div>       
-          <div>Long: {{entry.location[0]}}</div>
-          <div>Lat: {{entry.location[1]}}</div>
-          <div>Photo: {{entry.photo}}</div>
-        </div>
-      </ul>
-    </div>
-
     <div *ngIf='newEntry==false'>
       <button class="btn btn-primary newEntry" (click)='onNewClicked()'>New Entry</button>
     </div>
@@ -21,6 +10,29 @@
   </div>
 
   <div *ngIf='newEntry==true' class="container newEntryContainer">
-    <app-new-entry (onSaved)="onSavedEntryCompleted($event)"></app-new-entry>
+    <app-new-entry (Saved)="onSavedEntryCompleted($event)"></app-new-entry>
   </div>
-</div>
+
+  <div *ngIf='newEntry==false'>
+    <div class='row'>
+      <div class='col-md-1'></div>
+      <div class='myListContainer col-md-4'>
+        <ul>
+          <div *ngFor='let entry of entries'>
+            <div class='myListEntry' (click)='onEntryClicked(entry.description)'>
+              <div>Description: {{entry.description}}</div>
+              <div>Long: {{entry.location[0]}}</div>
+              <div>Lat: {{entry.location[1]}}</div>
+              <img [src]='entry.photo' style="width:150px"/>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div *ngIf='currentEntry!=null' class='entryContainer col-md-6'>
+        {{currentEntry.description}}
+        {{currentEntry.location}}
+        {{currentEntry.photo}}
+        <button class='btn btn-danger' (click)='onDeleteEntryClicked()'>Delete</button>
+      </div>
+    </div>
+  </div>

@@ -8,22 +8,22 @@ import {} from '@types/googlemaps';
 })
 export class MapComponent implements OnInit {
 
-  @Output() onLocationSaved = new EventEmitter<Array<number>>();
+  @Output() LocationSaved = new EventEmitter<Array<number>>();
   @ViewChild('googlemap') gmapElement: any;
-  
+
   map: google.maps.Map;
   marker: google.maps.Marker;
 
   long: number;
   lat: number;
   found: boolean;
-  errorMessage: string = '';
+  errorMessage = '';
 
   constructor() { }
 
   ngOnInit() {
     console.log('something');
-    var mapOptions = {
+    const mapOptions = {
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -33,10 +33,10 @@ export class MapComponent implements OnInit {
     this.findMe();
   }
 
-  showMe(lat: number, long: number) : void {
-    
-    let location = new google.maps.LatLng(lat, long);
-   
+  showMe(lat: number, long: number): void {
+
+    const location = new google.maps.LatLng(lat, long);
+
     this.map.setCenter(location);
 
     this.marker = new google.maps.Marker({
@@ -48,7 +48,7 @@ export class MapComponent implements OnInit {
     this.found = true;
   }
 
-  findMe() : void {
+  findMe(): void {
     if (navigator.geolocation) {
 
       navigator.geolocation.getCurrentPosition(position => {
@@ -59,19 +59,19 @@ export class MapComponent implements OnInit {
       },
       error => {
         console.log(`Not working: ${error}`);
-        this.errorMessage = 'Failed to locate. Please try again.'
+        this.errorMessage = 'Failed to locate. Please try again.';
       },
       {
-        maximumAge:1000,
+        maximumAge: 1000,
         timeout: 15000
       }
     );
     } else {
-      alert("Geolocation not available for this browser");
-    } 
+      alert('Geolocation not available for this browser');
+    }
   }
 
-  onRelocateMeClicked() : void {
+  onRelocateMeClicked(): void {
     if (!this.lat || !this.long) {
       this.findMe();
     } else {
@@ -79,20 +79,20 @@ export class MapComponent implements OnInit {
     }
   }
 
-  onRetryClicked() : void {
+  onRetryClicked(): void {
     this.errorMessage = '';
     this.findMe();
   }
 
-  onSaveLocationClicked() : void {
+  onSaveLocationClicked(): void {
 
-    let result : Array<number> = [this.lat, this.long]
+    const result: Array<number> = [this.lat, this.long];
 
-    this.onLocationSaved.emit(result);
+    this.LocationSaved.emit(result);
   }
 
   onCancelClicked(): void {
-    let result : Array<number> = [0,0]
+    const result: Array<number> = [0, 0];
 
     this.onLocationSaved.emit(result);
   }

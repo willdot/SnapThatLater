@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-//import { loadavg } from 'os';
+// import { loadavg } from 'os';
 import { GoogleLocationService } from '../services/google-location.service';
 import { SnapEntryInterface } from '../models/snap-entry-interface';
-
 
 @Component({
   selector: 'app-new-entry',
@@ -10,21 +9,19 @@ import { SnapEntryInterface } from '../models/snap-entry-interface';
   styleUrls: ['./new-entry.component.css']
 })
 export class NewEntryComponent implements OnInit {
+  @Output() Saved = new EventEmitter<SnapEntryInterface>();
 
-  @Output() onSaved = new EventEmitter<SnapEntryInterface>();
-
-  showCamera: boolean = false;
-  showMap: boolean = false;
+  showCamera = false;
+  showMap = false;
 
   location: Array<number> = [];
-  image: string = '';
+  image = '';
 
   googleResult: any;
 
-  constructor(private googleLocation: GoogleLocationService) { }
+  constructor(private googleLocation: GoogleLocationService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onShowCameraClicked(): void {
     this.showCamera = !this.showCamera;
@@ -35,42 +32,38 @@ export class NewEntryComponent implements OnInit {
   }
 
   onSaveClicked(): void {
-
-    let outPut : SnapEntryInterface = {
+    const outPut: SnapEntryInterface = {
       description: 'Something',
       location: this.location,
       photo: this.image
-    }
+    };
 
-    this.onSaved.emit(outPut);
+    this.Saved.emit(outPut);
   }
 
-  onCancelClicked() : void {
-    this.onSaved.emit(null);
+  onCancelClicked(): void {
+    this.Saved.emit(null);
   }
 
   onLocationSavedCompleted(location: Array<number>) {
     this.showMap = false;
-    if (location[0]!= 0 && location[1]!=0) {
+    if (location[0] !== 0 && location[1] !== 0) {
       this.location = location;
 
       this.getCityNameFromCoords();
     }
   }
 
-  onCameraSavedComplete(cameraImage: string) {
-    this.image = cameraImage;
-    this.showCamera = false;
-  }
-
   getCityNameFromCoords(): void {
-    this.googleLocation.getLocationFromCoords(this.location)
+    this.googleLocation
+      .getLocationFromCoords(this.location)
       .subscribe(result => {
         this.googleResult = result;
       });
   }
 
-
+  onCameraSavedComplete(cameraImage: string) {
+    this.image = cameraImage;
+    this.showCamera = false;
+  }
 }
-
-

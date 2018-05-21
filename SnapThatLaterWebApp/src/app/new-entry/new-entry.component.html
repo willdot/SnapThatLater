@@ -7,11 +7,11 @@
 <button *ngIf='showMap==false && showCamera==false' class="btn btn-warning" (click)='onShowMapClicked()'>Find me</button>
 <div class="webcam">
     <div *ngIf='showCamera==true'>
-        <app-camera (onCameraSaved)="onCameraSavedComplete($event)"></app-camera>
+        <app-camera (CameraSaved)="onCameraSavedComplete($event)"></app-camera>
     </div>
 
     <div *ngIf='showMap==true'>
-        <app-map (onLocationSaved)="onLocationSavedCompleted($event)"></app-map>
+        <app-map (LocationSaved)="onLocationSavedCompleted($event)"></app-map>
     </div>
 </div>
 

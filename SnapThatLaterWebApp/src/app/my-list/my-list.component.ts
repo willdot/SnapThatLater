@@ -8,16 +8,24 @@ import { SnapEntryInterface } from '../models/snap-entry-interface';
 })
 export class MyListComponent implements OnInit {
 
+  newEntry = false;
+  entries: SnapEntryInterface[] = [];
+
+  currentEntry: SnapEntryInterface = null;
+
   constructor() { }
 
   ngOnInit() {
+    this.createFakeEntry('Something', [1, 2], '');
+    this.createFakeEntry('Something else', [9, 2], '');
   }
-
-  newEntry: boolean = false;
-  entries: SnapEntryInterface[] = [];
 
   onNewClicked(): void {
     this.newEntry = true;
+  }
+
+  onEntryClicked(entry: string): void {
+    this.currentEntry = this.entries.find( p => p.description === entry);
   }
 
   onSavedEntryCompleted(saved: SnapEntryInterface) {
@@ -27,4 +35,18 @@ export class MyListComponent implements OnInit {
     }
   }
 
+  onDeleteEntryClicked(): void {
+    this.entries = this.entries.filter(p => p !== this.currentEntry);
+    this.currentEntry = null;
+  }
+
+  createFakeEntry(description: string, location: Array<number>, photo: string): void {
+    const entry: SnapEntryInterface = {
+      description: description,
+      location: location,
+      photo: photo
+    };
+
+    this.entries.push(entry);
+  }
 }

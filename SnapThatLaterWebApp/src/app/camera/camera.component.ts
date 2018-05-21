@@ -10,12 +10,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CameraComponent implements OnInit {
 
-  @Output() onCameraSaved = new EventEmitter<string>();
+  @Output() CameraSaved = new EventEmitter<string>();
 
-  photoTaken: boolean = false;
-  maxCameraWidth : number;
-  maxCameraHeight : number;
-  cameraImage : WebcamImage;
+  photoTaken = false;
+  maxCameraWidth: number;
+  maxCameraHeight: number;
+  cameraImage: WebcamImage;
 
   private cameraTrigger: Subject<void> = new Subject<void>();
 
@@ -26,26 +26,26 @@ export class CameraComponent implements OnInit {
     this.maxCameraWidth = window.innerWidth;
   }
 
-  takePhotoClick() : void {
+  takePhotoClick(): void {
     this.cameraTrigger.next();
   }
 
-  onSaveCameraClick() : void {
-    this.onCameraSaved.emit(this.cameraImage.imageAsDataUrl);
+  onSaveCameraClick(): void {
+    this.CameraSaved.emit(this.cameraImage.imageAsDataUrl);
   }
 
-  onCancelCameraClick() : void {
+  onCancelCameraClick(): void {
 
-    this.onCameraSaved.emit('');
+    this.CameraSaved.emit('');
   }
 
-  onRetakeClick() : void {
+  onRetakeClick(): void {
     this.photoTaken = false;
     this.cameraImage = null;
   }
 
   public handleImage(cameraImage: WebcamImage): void {
-    var self = this;
+    const self = this;
     this.photoTaken = true;
     self.cameraImage = cameraImage;
   }
