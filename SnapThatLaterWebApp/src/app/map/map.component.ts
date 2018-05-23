@@ -94,7 +94,7 @@ export class MapComponent implements OnInit {
   onCancelClicked(): void {
     const result: Array<number> = [0, 0];
 
-    this.onLocationSaved.emit(result);
+    this.LocationSaved.emit(result);
   }
 
 }
