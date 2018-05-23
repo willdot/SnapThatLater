@@ -1,7 +1,9 @@
 <div class="container">
-  <button class="btn btn-success" (click)='onSaveLocationClicked()'>Save location</button>
-  <button class="btn btn-danger" (click)='onCancelClicked()'>Cancel</button> 
-  <button *ngIf='found==true' class="btn btn-warning" (click)='onRelocateMeClicked()'>Relocate me</button>
+  <div class='map-buttons'>
+    <button class="btn btn-success" (click)='onSaveLocationClicked()'>Save location</button>
+    <button class="btn btn-danger" (click)='onCancelClicked()'>Cancel</button>
+    <button *ngIf='found==true' class="btn btn-warning" (click)='onRelocateMeClicked()'>Relocate me</button>
+  </div>
   <div #googlemap class="map"></div>
   <div>
     {{errorMessage}}

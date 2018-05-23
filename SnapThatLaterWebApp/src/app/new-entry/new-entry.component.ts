@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-// import { loadavg } from 'os';
 import { GoogleLocationService } from '../services/google-location.service';
 import { SnapEntryInterface } from '../models/snap-entry-interface';
 

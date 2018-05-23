@@ -1,8 +1,11 @@
 .map{
-    width:80%;
-    height: 300px;
+    width:100%;
+    height: 350px;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
+.map-buttons {
+  padding: 5px;
+}
