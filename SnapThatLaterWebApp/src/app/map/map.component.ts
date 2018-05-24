@@ -58,12 +58,12 @@ export class MapComponent implements OnInit {
         this.errorMessage = '';
       },
       error => {
-        console.log(`Not working: ${error}`);
+        console.log(`Not working: ${error.message}`);
         this.errorMessage = 'Failed to locate. Please try again.';
       },
       {
         maximumAge: 1000,
-        timeout: 15000
+        timeout: 35000
       }
     );
     } else {
