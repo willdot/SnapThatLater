@@ -1,14 +1,16 @@
-.map{
-    width:70%;
-    height: 400px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.map {
+  width: 70%;
+  height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-.webcam{
-    width:70%;
-    height: 400px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.webcam {
+  height: 500px;
+  display: block;
+  margin-right: auto;
+}
+
+.container {
+  padding: 5px;
 }

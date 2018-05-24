@@ -24,8 +24,8 @@ export class MyListComponent implements OnInit {
     this.newEntry = true;
   }
 
-  onEntryClicked(entry: string): void {
-    this.currentEntry = this.entries.find( p => p.description === entry);
+  onEntryClicked(entry: SnapEntryInterface): void {
+    this.currentEntry = this.entries.find( p => p === entry);
   }
 
   onSavedEntryCompleted(saved: SnapEntryInterface) {
@@ -37,6 +37,10 @@ export class MyListComponent implements OnInit {
 
   onDeleteEntryClicked(): void {
     this.entries = this.entries.filter(p => p !== this.currentEntry);
+    this.currentEntry = null;
+  }
+
+  onCancelClicked(): void {
     this.currentEntry = null;
   }
 

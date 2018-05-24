@@ -19,7 +19,7 @@
       <div class='myListContainer col-md-4'>
         <ul>
           <div *ngFor='let entry of entries'>
-            <div class='myListEntry' (click)='onEntryClicked(entry.description)'>
+            <div class='myListEntry' (click)='onEntryClicked(entry)'>
               <div>Description: {{entry.description}}</div>
               <div>Long: {{entry.location[0]}}</div>
               <div>Lat: {{entry.location[1]}}</div>
@@ -33,6 +33,7 @@
         {{currentEntry.location}}
         {{currentEntry.photo}}
         <button class='btn btn-danger' (click)='onDeleteEntryClicked()'>Delete</button>
+        <button class='btn btn-warning' (click)='onCancelClicked()'>Cancel</button>
       </div>
     </div>
   </div>

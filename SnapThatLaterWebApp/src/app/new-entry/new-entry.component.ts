@@ -13,6 +13,7 @@ export class NewEntryComponent implements OnInit {
   showCamera = false;
   showMap = false;
 
+  description = '';
   location: Array<number> = [];
   image = '';
 
@@ -32,7 +33,7 @@ export class NewEntryComponent implements OnInit {
 
   onSaveClicked(): void {
     const outPut: SnapEntryInterface = {
-      description: 'Something',
+      description: this.description,
       location: this.location,
       photo: this.image
     };
