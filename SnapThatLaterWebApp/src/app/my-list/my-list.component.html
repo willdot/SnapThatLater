@@ -3,22 +3,27 @@
   <div class="background" style="text-align:center">
     <h1>
     </h1>
-    <div *ngIf='newEntry==false'>
+    <div *ngIf='newEntry==false && currentEntry==null'>
       <button class="btn btn-primary newEntry" (click)='onNewClicked()'>New Entry</button>
     </div>
 
   </div>
 
-  <div *ngIf='newEntry==true' class="container newEntryContainer">
+  <div *ngIf='newEntry==true && currentEntry==null' class="container newEntryContainer">
     <app-new-entry (Saved)="onSavedEntryCompleted($event)"></app-new-entry>
   </div>
 
-  <div *ngIf='newEntry==false'>
+
+  <div *ngIf='currentEntry!=null' class="container newEntryContainer">
+    <app-existing-entry [entry]="currentEntry" (Saved)="onSavedEntryCompleted($event)"></app-existing-entry>
+  </div>
+
+  <div *ngIf='newEntry==false && currentEntry==null'>
     <div class='row'>
       <div class='col-md-1'></div>
       <div class='myListContainer col-md-4'>
         <ul>
-          <div *ngFor='let entry of entries'>
+          <div *ngFor='let entry of EntryService.entries'>
             <div class='myListEntry' (click)='onEntryClicked(entry)'>
               <div>Description: {{entry.description}}</div>
               <div>Long: {{entry.location[0]}}</div>

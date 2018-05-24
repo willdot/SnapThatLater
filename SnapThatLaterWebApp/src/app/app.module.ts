@@ -10,7 +10,9 @@ import { MyListComponent } from './my-list/my-list.component';
 import { CameraComponent } from './camera/camera.component';
 import { MapComponent } from './map/map.component';
 import { GoogleLocationService } from './services/google-location.service';
+import { EntryService} from './services/entry-service/entry.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ExistingEntryComponent } from './existing-entry/existing-entry.component';
 
 const appRoutes: Routes = [
   {path: '', component: MyListComponent},
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
     NewEntryComponent,
     MyListComponent,
     CameraComponent,
-    MapComponent
+    MapComponent,
+    ExistingEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {useHash: false}),
     HttpClientModule
   ],
-  providers: [GoogleLocationService],
+  providers: [GoogleLocationService, EntryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

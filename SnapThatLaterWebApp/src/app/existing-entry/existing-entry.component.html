@@ -1,0 +1,30 @@
+<button class='btn btn-success' (click)='onSaveClicked()'>
+  Save</button>
+<button class="btn btn-danger" (click)='onCancelClicked()'>
+  Cancel
+</button>
+<button *ngIf='showCamera==false && showMap==false' class="btn btn-warning" (click)='onShowCameraClicked()'>{{photoButton}}</button>
+<button *ngIf='showMap==false && showCamera==false' class="btn btn-warning" (click)='onShowMapClicked()'>{{mapButton}}</button>
+
+<div class='container'>
+  <label class='label'>Description</label>
+  <input [(ngModel)]='description' class='form-control' />
+</div>
+
+<div class='container'>
+  <div class="webcam" *ngIf='showCamera==true'>
+    <app-camera (CameraSaved)="onCameraSavedComplete($event)"></app-camera>
+  </div>
+
+  <div class="map" *ngIf='showMap==true'>
+    <app-map (LocationSaved)="onLocationSavedCompleted($event)"></app-map>
+  </div>
+</div>
+
+<div>
+  {{image}} {{location[0]}} {{location[1]}}
+</div>
+
+<div *ngIf='googleResult!=null'>
+  Location: {{googleResult['results'][0]['address_components'][1]['long_name']}}, {{googleResult['results'][0]['address_components'][2]['long_name']}}
+</div>

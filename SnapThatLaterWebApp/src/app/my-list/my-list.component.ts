@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SnapEntryInterface } from '../models/snap-entry-interface';
+import { EntryService } from '../services/entry-service/entry.service';
 
 @Component({
   selector: 'app-my-list',
@@ -9,11 +10,15 @@ import { SnapEntryInterface } from '../models/snap-entry-interface';
 export class MyListComponent implements OnInit {
 
   newEntry = false;
-  entries: SnapEntryInterface[] = [];
+  // entries: SnapEntryInterface[] = [];
 
   currentEntry: SnapEntryInterface = null;
 
-  constructor() { }
+  public EntryService: EntryService;
+
+  constructor(entryService: EntryService) {
+    this.EntryService = entryService;
+   }
 
   ngOnInit() {
     this.createFakeEntry('Something', [1, 2], '');
@@ -25,18 +30,19 @@ export class MyListComponent implements OnInit {
   }
 
   onEntryClicked(entry: SnapEntryInterface): void {
-    this.currentEntry = this.entries.find( p => p === entry);
+    this.currentEntry = this.EntryService.entries.find( p => p === entry);
+    console.log(this.currentEntry);
   }
 
   onSavedEntryCompleted(saved: SnapEntryInterface) {
     this.newEntry = false;
     if (saved != null) {
-      this.entries.push(saved);
+      this.EntryService.entries.push(saved);
     }
   }
 
   onDeleteEntryClicked(): void {
-    this.entries = this.entries.filter(p => p !== this.currentEntry);
+    this.EntryService.entries = this.EntryService.entries.filter(p => p !== this.currentEntry);
     this.currentEntry = null;
   }
 
@@ -51,6 +57,6 @@ export class MyListComponent implements OnInit {
       photo: photo
     };
 
-    this.entries.push(entry);
+    this.EntryService.entries.push(entry);
   }
 }
