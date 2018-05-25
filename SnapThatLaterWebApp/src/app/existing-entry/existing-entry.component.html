@@ -3,8 +3,12 @@
 <button class="btn btn-danger" (click)='onCancelClicked()'>
   Cancel
 </button>
-<button *ngIf='showCamera==false && showMap==false' class="btn btn-warning" (click)='onShowCameraClicked()'>{{photoButton}}</button>
-<button *ngIf='showMap==false && showCamera==false' class="btn btn-warning" (click)='onShowMapClicked()'>{{mapButton}}</button>
+
+<button *ngIf='showCamera==false && showMap==false' class="btn btn-warning"
+(click)='onShowCameraClicked()'>{{photoButton}}</button>
+
+<button *ngIf='showMap==false && showCamera==false' class="btn btn-warning"
+(click)='onShowMapClicked()'>{{mapButton}}</button>
 
 <div class='container'>
   <label class='label'>Description</label>
@@ -17,7 +21,7 @@
   </div>
 
   <div class="map" *ngIf='showMap==true'>
-    <app-map (LocationSaved)="onLocationSavedCompleted($event)"></app-map>
+    <app-map [ExistingLocation]='location' (LocationSaved)='onLocationSavedCompleted($event)'></app-map>
   </div>
 </div>
 <div class='container'>

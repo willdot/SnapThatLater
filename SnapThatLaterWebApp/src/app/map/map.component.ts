@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Output,
+  EventEmitter,
+  Input
+} from '@angular/core';
 import {} from '@types/googlemaps';
 
 @Component({
@@ -7,7 +14,7 @@ import {} from '@types/googlemaps';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-
+  @Input() ExistingLocation: Array<number>;
   @Output() LocationSaved = new EventEmitter<Array<number>>();
   @ViewChild('googlemap') gmapElement: any;
 
@@ -19,7 +26,7 @@ export class MapComponent implements OnInit {
   found: boolean;
   errorMessage = '';
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     console.log('something');
@@ -34,7 +41,6 @@ export class MapComponent implements OnInit {
   }
 
   showMe(lat: number, long: number): void {
-
     const location = new google.maps.LatLng(lat, long);
 
     this.map.setCenter(location);
@@ -49,25 +55,29 @@ export class MapComponent implements OnInit {
   }
 
   findMe(): void {
-    if (navigator.geolocation) {
-
-      navigator.geolocation.getCurrentPosition(position => {
-        this.lat = position.coords.latitude;
-        this.long = position.coords.longitude;
-        this.showMe(position.coords.latitude, position.coords.longitude);
-        this.errorMessage = '';
-      },
-      error => {
-        console.log(`Not working: ${error.message}`);
-        this.errorMessage = 'Failed to locate. Please try again.';
-      },
-      {
-        maximumAge: 1000,
-        timeout: 35000
-      }
-    );
+    if (this.ExistingLocation != null) {
+      this.showMe(this.ExistingLocation[0], this.ExistingLocation[1]);
     } else {
-      alert('Geolocation not available for this browser');
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            this.lat = position.coords.latitude;
+            this.long = position.coords.longitude;
+            this.showMe(position.coords.latitude, position.coords.longitude);
+            this.errorMessage = '';
+          },
+          error => {
+            console.log(`Not working: ${error.message}`);
+            this.errorMessage = 'Failed to locate. Please try again.';
+          },
+          {
+            maximumAge: 1000,
+            timeout: 35000
+          }
+        );
+      } else {
+        alert('Geolocation not available for this browser');
+      }
     }
   }
 
@@ -85,7 +95,6 @@ export class MapComponent implements OnInit {
   }
 
   onSaveLocationClicked(): void {
-
     const result: Array<number> = [this.lat, this.long];
 
     this.LocationSaved.emit(result);
@@ -96,5 +105,4 @@ export class MapComponent implements OnInit {
 
     this.LocationSaved.emit(result);
   }
-
 }

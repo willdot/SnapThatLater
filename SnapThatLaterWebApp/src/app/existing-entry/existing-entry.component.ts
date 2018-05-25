@@ -35,6 +35,14 @@ export class ExistingEntryComponent implements OnInit {
     this.location = this.entry.location;
     this.image = this.entry.photo;
     this.googleResult = this.entry.locationName;
+
+    if (this.entry.photo !== '') {
+      this.photoButton = 'Retake photo';
+    }
+
+    if (this.entry.location[0] !== 0 && this.entry.location[1] !== 0) {
+      this.mapButton = 'Show location';
+    }
   }
 
   onSaveClicked(): void {
@@ -56,11 +64,19 @@ export class ExistingEntryComponent implements OnInit {
 
   onDeleteClicked(): void {}
 
-  onShowCameraClicked(): void {}
+  onShowCameraClicked(): void {
+    this.showCamera = !this.showCamera;
+  }
 
-  onShowMapClicked(): void {}
+  onShowMapClicked(): void {
+    this.showMap = !this.showMap;
+  }
 
-  onCameraSavedComplete(cameraImage: string) {}
+  onCameraSavedComplete(cameraImage: string) {
+    this.image = cameraImage;
+    this.showCamera = false;
+
+  }
 
   onLocationSavedCompleted(location: Array<number>) {}
 }
