@@ -35,6 +35,7 @@ export class NewEntryComponent implements OnInit {
     const outPut: SnapEntryInterface = {
       description: this.description,
       location: this.location,
+      locationName: this.googleResult,
       photo: this.image
     };
 
@@ -49,7 +50,6 @@ export class NewEntryComponent implements OnInit {
     this.showMap = false;
     if (location[0] !== 0 && location[1] !== 0) {
       this.location = location;
-
       this.getCityNameFromCoords();
     }
   }
@@ -58,8 +58,16 @@ export class NewEntryComponent implements OnInit {
     this.googleLocation
       .getLocationFromCoords(this.location)
       .subscribe(result => {
-        this.googleResult = result;
+        if (result != null && result['results'].length > 0) {
+          this.convertGoogleLocationResult(result);
+        }
       });
+  }
+
+  convertGoogleLocationResult(googleLocation): void {
+    this.googleResult =
+      `${googleLocation['results'][0]['address_components'][1]['long_name']},
+       ${googleLocation['results'][0]['address_components'][2]['long_name']}`;
   }
 
   onCameraSavedComplete(cameraImage: string) {

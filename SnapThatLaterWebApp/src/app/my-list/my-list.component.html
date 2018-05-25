@@ -15,7 +15,7 @@
 
 
   <div *ngIf='currentEntry!=null' class="container newEntryContainer">
-    <app-existing-entry [entry]="currentEntry" (Saved)="onSavedEntryCompleted($event)"></app-existing-entry>
+    <app-existing-entry [entry]="currentEntry" (Saved)="onUpdatedEntryCompleted($event)"></app-existing-entry>
   </div>
 
   <div *ngIf='newEntry==false && currentEntry==null'>
@@ -26,8 +26,7 @@
           <div *ngFor='let entry of EntryService.entries'>
             <div class='myListEntry' (click)='onEntryClicked(entry)'>
               <div>Description: {{entry.description}}</div>
-              <div>Long: {{entry.location[0]}}</div>
-              <div>Lat: {{entry.location[1]}}</div>
+              <div>Location: {{entry.locationName}}</div>
               <img [src]='entry.photo' style="width:150px"/>
             </div>
           </div>

@@ -6,9 +6,6 @@ export class EntryService {
 
   entries: SnapEntryInterface[] = [];
 
-
-
-
   constructor() { }
 
 }

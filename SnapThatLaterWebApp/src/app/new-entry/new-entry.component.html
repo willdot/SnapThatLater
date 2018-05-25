@@ -3,12 +3,15 @@
 <button class="btn btn-danger" (click)='onCancelClicked()'>
   Cancel
 </button>
-<button *ngIf='showCamera==false && showMap==false' class="btn btn-warning" (click)='onShowCameraClicked()'>Add photo</button>
-<button *ngIf='showMap==false && showCamera==false' class="btn btn-warning" (click)='onShowMapClicked()'>Find me</button>
 
 <div class='container'>
   <label class='label'>Description</label>
   <input [(ngModel)]='description' class='form-control' />
+</div>
+
+<div class='container'>
+  <button *ngIf='showCamera==false && showMap==false' class="btn btn-warning" (click)='onShowCameraClicked()'>Add photo</button>
+  <button *ngIf='showMap==false && showCamera==false' class="btn btn-warning" (click)='onShowMapClicked()'>Find me</button>
 </div>
 
 <div class='container'>
@@ -21,10 +24,10 @@
   </div>
 </div>
 
-<div>
-  {{image}} {{location[0]}} {{location[1]}}
+<div *ngIf="image!=''">
+  <img [src]='image' style="width:150px"/>
 </div>
 
 <div *ngIf='googleResult!=null'>
-  Location: {{googleResult['results'][0]['address_components'][1]['long_name']}}, {{googleResult['results'][0]['address_components'][2]['long_name']}}
+  Location: {{googleResult}}
 </div>

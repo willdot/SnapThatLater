@@ -34,10 +34,21 @@ export class ExistingEntryComponent implements OnInit {
     this.description = this.entry.description;
     this.location = this.entry.location;
     this.image = this.entry.photo;
-
+    this.googleResult = this.entry.locationName;
   }
 
-  onSaveClicked(): void {}
+  onSaveClicked(): void {
+
+    const outPut: SnapEntryInterface = {
+      description: this.description,
+      location: this.location,
+      locationName: this.googleResult,
+      photo: this.image
+    };
+
+    console.log(outPut);
+    this.Saved.emit(outPut);
+  }
 
   onCancelClicked(): void {
     this.Saved.emit(null);

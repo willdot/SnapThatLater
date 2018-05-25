@@ -41,6 +41,15 @@ export class MyListComponent implements OnInit {
     }
   }
 
+  onUpdatedEntryCompleted(updated: SnapEntryInterface): void {
+    if (updated != null) {
+     const existingLocation = this.EntryService.entries.indexOf(this.currentEntry);
+     this.EntryService.entries.splice(existingLocation, 1, updated);
+    }
+
+    this.currentEntry = null;
+  }
+
   onDeleteEntryClicked(): void {
     this.EntryService.entries = this.EntryService.entries.filter(p => p !== this.currentEntry);
     this.currentEntry = null;
@@ -54,6 +63,7 @@ export class MyListComponent implements OnInit {
     const entry: SnapEntryInterface = {
       description: description,
       location: location,
+      locationName: '',
       photo: photo
     };
 

@@ -20,11 +20,12 @@
     <app-map (LocationSaved)="onLocationSavedCompleted($event)"></app-map>
   </div>
 </div>
+<div class='container'>
+  <div *ngIf="image!=''">
+    <img [src]='image' style="width:150px" />
+  </div>
 
-<div>
-  {{image}} {{location[0]}} {{location[1]}}
-</div>
-
-<div *ngIf='googleResult!=null'>
-  Location: {{googleResult['results'][0]['address_components'][1]['long_name']}}, {{googleResult['results'][0]['address_components'][2]['long_name']}}
+  <div *ngIf='googleResult!=null'>
+    Location: {{googleResult}}
+  </div>
 </div>
